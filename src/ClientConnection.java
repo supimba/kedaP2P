@@ -1,9 +1,11 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.imageio.spi.RegisterableService;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+import util.ServerLogger;
 
 
 public class ClientConnection implements Runnable {
@@ -13,18 +15,19 @@ public class ClientConnection implements Runnable {
 	private PrintWriter out ; 
 	private BufferedReader in ;  
 	private ArrayList<Object> listAllClients ; 
-	private String ipAdress ; 
+	private static Logger logger = ServerLogger.getLogger() ;
+	private ObjectInputStream objectInput ; 
+	private ObjectOutputStream objectOutput ; 
 	//TODO :  Envoie l'adresse ip puis envoie la liste des fichiers après confirmation
 	//TODO : Demande confirmation de rengistrement
 
-
-
-	public ClientConnection(Socket clientSocket, ArrayList<Object> listAllClients) {
+	public ClientConnection(Socket clientSocket, ArrayList<Object> listAllClients, ObjectInputStream objectInput) {
 		this.clientSocket = clientSocket ;
-		this.listAllClients = listAllClients; 
-		this.ipAdress = clientSocket.getRemoteSocketAddress().toString() ;
-		
-		
+		this.listAllClients = listAllClients;
+		this.objectInput = objectInput ; 
+		//		this.ipAdress = clientSocket.getRemoteSocketAddress().toString() ;
+
+
 	}
 
 	/*
@@ -34,91 +37,108 @@ public class ClientConnection implements Runnable {
 	 */
 	@Override
 	public void run() {
-		String actionChoice ; 
+		String actionChoice ;
+		String ipAdress ;
+		Object object ;
+
 
 		try {
 
-			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())) ;
-			out = new PrintWriter(clientSocket.getOutputStream(), true) ; 
-
-			out.println("Chose option :");
-			out.flush();
-			out.println("1 to register");
-			out.flush();
-			out.println("2 to get file list");
-			out.flush();
-			out.println("3 to to quit ");
-
-
+			//in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())) ;
+			//			out = new PrintWriter(clientSocket.getOutputStream(), true) ;
 			while(true){
-				actionChoice = in.readLine() ; 
-
-				System.out.println("Client choice : ");
-				System.out.println(actionChoice);
-
+				actionChoice = (String) objectInput.readObject() ;
+				System.out.println("Action " +actionChoice);
 				switch(actionChoice){
-				case "1": 
-					System.out.println("ready to register");
-					registerClient();
+
+				case "1":
+					logger.log(Level.INFO, "Action registration (1) chosen") ;
+
+					object = objectInput.readObject() ;
+					registerClient(object);
+					objectInput.close();
+
+					logger.log(Level.INFO, "ObjectInputStream closed");
 					break;
 
 				case"2":
-					System.out.println("ready to get files");					
+					System.out.println("ready to get files");
+					ArrayList<Object> clientsArrayList = getClientsFilesList() ;
+
+					objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
+					objectOutput.writeObject(clientsArrayList);
+					objectOutput.flush() ; 
+
+					System.out.println("Flush");
+
 					break;
 
 				case "3":
 					clientSocket.close();
 					break;
-				default:
-					out.println("Chose option :");
-					out.flush(); 
-					out.println("1 to register :");
-					out.println("2 to get file list :");
-					out.println("3 to to quit :");
-					break;
 				}
 
-
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
+		} catch ( ClassNotFoundException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			e.printStackTrace();
+		}catch(SocketException e ){
+			logger.log(Level.SEVERE, e.getMessage(), e);
+
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
 	}
 
-	public void registerClient(){
-		
+	private void registerClient(Object object){
+
+		clientFiles = (ArrayList<String>) object ; 
+
+		//TODO : A supprimer
 		// récupérer directemnet un objet ArrayList  : https://docs.oracle.com/javase/tutorial/essential/io/objectstreams.html
-		clientFiles = new ArrayList<String>() ;
-		clientFiles.add(ipAdress) ; 
-		printArray();
+		//		clientFiles = new ArrayList<String>() ;
+		//		clientFiles.add(ipAdress) ;
+
+		// TODO: A supprimer
+		printArray(clientFiles);
+		listAllClients.add(clientFiles) ;
+		logger.info("Registration from "+clientSocket.getRemoteSocketAddress()+" complete.");
 
 		try {
-
-			while(in.readLine()!=null){
-
-				clientFiles.add(in.readLine());
-
-			}
-
-			listAllClients.add(clientFiles) ;
-			printArray();
-
-
+			out = new PrintWriter(clientSocket.getOutputStream(), true);
+			out.println("File list was registred.");
+			out.flush();
+			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			e.printStackTrace();
 		}
-		// ask client if he accept to share the list of files
+
+		printObjectList();
+
 	}
-	
-	public void printArray(){
-		
-		for(String files : clientFiles)
-			System.out.println(files);
-		
+	private ArrayList<Object> getClientsFilesList() {
+
+		return listAllClients ; 
+
 	}
-	
+
+	public void printArray(ArrayList<String> array){
+
+		for(String files : array)
+			logger.log(Level.INFO, "Filename : \"" + files+ "\"");
+
+	}
+
+	public void printObjectList(){
+
+		for(int i =0 ; i<  listAllClients.size(); i++ ){
+			printArray( (ArrayList<String>)listAllClients.get(i) ) ; 
+		}
+
+	}
+
 }
 

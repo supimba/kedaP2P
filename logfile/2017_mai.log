@@ -1,2 +1,20 @@
-22-05-2017 23:46:27 (Server )  [INFO] Wait for connection
-22-05-2017 23:48:41 (Server.main)  [INFO] Wait for connection
+26-05-2017 11:39:17 (util.ServerLogger.getLogger)  [INFO] Logger started
+26-05-2017 11:39:18 (Server.listeningSocket)  [INFO] The server is waiting for connection
+26-05-2017 11:39:26 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45831 was accepted
+26-05-2017 11:39:26 (Server.listeningSocket)  [INFO] Thread handle request from client
+26-05-2017 11:39:36 (ClientConnection.run)  [SEVERE] Connection reset
+26-05-2017 11:41:51 (util.ServerLogger.getLogger)  [INFO] Logger started
+26-05-2017 11:41:51 (Server.listeningSocket)  [INFO] The server is waiting for connection
+26-05-2017 11:41:54 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45858 was accepted
+26-05-2017 11:41:54 (Server.listeningSocket)  [INFO] Thread handle request from client
+26-05-2017 11:41:54 (ClientConnection.run)  [INFO] Action registration (1) chosen
+26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
+26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "Untitled 4"
+26-05-2017 11:41:54 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:45858 complete.
+26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
+26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "Untitled 4"
+26-05-2017 11:41:54 (ClientConnection.run)  [INFO] ObjectInputStream closed
+26-05-2017 11:41:54 (ClientConnection.run)  [SEVERE] socket closed
+26-05-2017 11:42:57 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45859 was accepted
+26-05-2017 11:42:57 (Server.listeningSocket)  [INFO] Thread handle request from client
+26-05-2017 11:42:57 (ClientConnection.run)  [SEVERE] Connection reset

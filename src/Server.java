@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectInputStream.GetField;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -6,63 +7,52 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
 
 
 import util.ServerLogger;
 
 
 public class Server {
-	private static InetAddress localAdress =null;
+
 	private static ServerSocket mySkServer; 
 	private static Socket clientSocket  = null ;
-	private static NetworkInterface ni;
 	private static Logger logger = ServerLogger.getLogger() ; 
-	
-	
+	private static ArrayList<Object> listAllClients = new ArrayList<Object>();
+
 
 	public static void main(String[] args) {
-		ArrayList<Object> listAllClients = new ArrayList<Object>();
+		listeningSocket() ; 
+	}
+
+
+
+	private static void listeningSocket(){
 
 		try {
-			ni = NetworkInterface.getByName("eth1");
-			Enumeration<InetAddress> inetAdress = ni.getInetAddresses() ;
+			mySkServer = new ServerSocket(45006) ; 
 
-			while(inetAdress.hasMoreElements())
-			{
-				InetAddress adress = inetAdress.nextElement() ; 
-				if(!adress.isLoopbackAddress() && !adress.isLinkLocalAddress())localAdress = adress ;
-			}
-
-			mySkServer = new ServerSocket(45000, 5, localAdress) ; 
-			ClientConnection clientConnection ; 
-
-			//			mySkServer.setSoTimeout(300000);
-
-			//TODO Mettre un log d'info pour la connexion
-			logger.info("Wait for connection") ; 
-
-
+			ClientConnection clientConnection ;
+			logger.log(Level.INFO, "The server is waiting for connection") ; 
 
 			while(true){
 				clientSocket = mySkServer.accept() ;
-				System.out.println("Client accepted");
+				logger.log(Level.INFO, "Connection from "+ clientSocket.getRemoteSocketAddress() +" was accepted");
 
-				clientConnection = new ClientConnection(clientSocket, listAllClients) ; 
+				ObjectInputStream objectInput = new ObjectInputStream(clientSocket.getInputStream())  ;
+				clientConnection = new ClientConnection(clientSocket, listAllClients, objectInput) ; 
 
 				Thread t = new Thread(clientConnection) ; 
 				t.start();
-
+				logger.log(Level.INFO, "Thread handle request from client");
 			}
 
-
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(),e);
 		}
-
-
-
 
 	}
 

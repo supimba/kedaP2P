@@ -2,6 +2,7 @@ package util;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerLogger {
@@ -11,21 +12,23 @@ public class ServerLogger {
 	private String filePath = "logfile/" ;
 	private Util u;
 	private String fileName ; 
-	
+
 	static public Logger getLogger(){
-		
-		if(logger == null)
-			serverLogger = new ServerLogger(); 
+
+		if(logger == null){
+			serverLogger = new ServerLogger();
+			logger.log(Level.INFO, "Logger started");
+		}
 		
 		return logger;
-}
+	}
 
 	public ServerLogger (){
 		u = new Util() ; 
 		String date = u.getDateMonth() ;
 		fileName = date+".log" ;
 		filePath += fileName ;
-
+		
 		logger = Logger.getLogger(fileName) ; 
 
 		try {
@@ -38,10 +41,10 @@ public class ServerLogger {
 			fh.setFormatter(myFormatter);
 
 		} catch (SecurityException e) {
-
+			logger.log(Level.SEVERE, e.getMessage(), e) ; 
 			e.printStackTrace();
 		} catch (IOException e) {
-
+			logger.log(Level.SEVERE, e.getMessage(), e) ; 
 			e.printStackTrace();
 		}
 
