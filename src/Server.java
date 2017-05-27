@@ -33,7 +33,7 @@ public class Server {
 	private static void listeningSocket(){
 
 		try {
-			mySkServer = new ServerSocket(45006) ; 
+			mySkServer = new ServerSocket(45005) ; 
 
 			ClientConnection clientConnection ;
 			logger.log(Level.INFO, "The server is waiting for connection") ; 

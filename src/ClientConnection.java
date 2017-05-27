@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -51,22 +56,23 @@ public class ClientConnection implements Runnable {
 				System.out.println("Action " +actionChoice);
 				switch(actionChoice){
 
-				case "1":
-					logger.log(Level.INFO, "Action registration (1) chosen") ;
+				case "registration":
+					logger.log(Level.INFO, "Action 'registration' chosen") ;
 
 					object = objectInput.readObject() ;
 					registerClient(object);
-					objectInput.close();
+//					objectInput.close();
 
 					logger.log(Level.INFO, "ObjectInputStream closed");
 					break;
 
-				case"2":
+				case"getfiles":
 					System.out.println("ready to get files");
 					ArrayList<Object> clientsArrayList = getClientsFilesList() ;
 
 					objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
 					objectOutput.writeObject(clientsArrayList);
+					System.out.println("avant flush");
 					objectOutput.flush() ; 
 
 					System.out.println("Flush");
@@ -74,7 +80,7 @@ public class ClientConnection implements Runnable {
 					break;
 
 				case "3":
-					clientSocket.close();
+//					clientSocket.close();
 					break;
 				}
 
@@ -86,7 +92,9 @@ public class ClientConnection implements Runnable {
 		}catch(SocketException e ){
 			logger.log(Level.SEVERE, e.getMessage(), e);
 
-		} catch (IOException e) {
+		}catch (EOFException e) {
+			// TODO: handle exception
+		}catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
@@ -106,15 +114,15 @@ public class ClientConnection implements Runnable {
 		listAllClients.add(clientFiles) ;
 		logger.info("Registration from "+clientSocket.getRemoteSocketAddress()+" complete.");
 
-		try {
-			out = new PrintWriter(clientSocket.getOutputStream(), true);
-			out.println("File list was registred.");
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-			e.printStackTrace();
-		}
+//		try {
+//			out = new PrintWriter(clientSocket.getOutputStream(), true);
+//			out.println("File list was registred.");
+//			out.flush();
+//			out.close();
+//		} catch (IOException e) {
+//			logger.log(Level.SEVERE, e.getMessage(), e);
+//			e.printStackTrace();
+//		}
 
 		printObjectList();
 
