@@ -1,180 +1,19 @@
-26-05-2017 11:39:17 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 11:39:18 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 11:39:26 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45831 was accepted
-26-05-2017 11:39:26 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 11:39:36 (ClientConnection.run)  [SEVERE] Connection reset
-26-05-2017 11:41:51 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 11:41:51 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 11:41:54 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45858 was accepted
-26-05-2017 11:41:54 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 11:41:54 (ClientConnection.run)  [INFO] Action registration (1) chosen
-26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "Untitled 4"
-26-05-2017 11:41:54 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:45858 complete.
-26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 11:41:54 (ClientConnection.printArray)  [INFO] Filename : "Untitled 4"
-26-05-2017 11:41:54 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 11:41:54 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 11:42:57 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:45859 was accepted
-26-05-2017 11:42:57 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 11:42:57 (ClientConnection.run)  [SEVERE] Connection reset
-26-05-2017 16:59:38 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 16:59:38 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 17:27:31 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 17:27:31 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 17:31:13 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47475 was accepted
-26-05-2017 17:31:13 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 17:31:13 (ClientConnection.run)  [INFO] Action registration chosen
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.lck"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.log"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.properties"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.script"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "sslsdk.log"
-26-05-2017 17:31:13 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47475 complete.
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.lck"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.log"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.properties"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "hasqldb_file.script"
-26-05-2017 17:31:13 (ClientConnection.printArray)  [INFO] Filename : "sslsdk.log"
-26-05-2017 17:31:13 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 17:31:13 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 17:59:48 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 17:59:48 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 18:12:48 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 18:12:48 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 18:13:15 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47642 was accepted
-26-05-2017 18:13:15 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 18:13:15 (ClientConnection.run)  [INFO] Action registration chosen
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:13:15 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47642 complete.
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:13:15 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:13:15 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 18:13:15 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 18:34:56 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47674 was accepted
-26-05-2017 18:34:56 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 18:34:56 (ClientConnection.run)  [INFO] Action registration chosen
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:34:56 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47674 complete.
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:34:56 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:34:56 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 18:34:56 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 18:35:47 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 18:35:47 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 18:36:00 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47675 was accepted
-26-05-2017 18:36:00 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 18:36:00 (ClientConnection.run)  [INFO] Action 'registration' chosen
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "04_LoggingLevels.docx"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "a50f6b920970ae87bf459fed07e1b071.gif"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Atom.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "AT_Portugal_Mama.JPG"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Cisco Packet Tracer.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ClientSocket.java"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Clio_memoire.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "comPlanContrat2017.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Counter-Strike.url"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "creditCardStatement.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "desktop.ini"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "eclipse  Luna 4.4.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ETH_Turoque_Account_Capture.JPG"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Gant_Daniel.xlsx"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "hipster_russe.jpg"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel_Page_1.png"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel_Page_2.png"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "index.jpg"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Les cingles de l informatique3_informatique pour tous.avi"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "myCloud.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Mémoire_Voyages.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "p2p_exemple.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Postman.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "roqueDanielID.rar"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Slack.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "toDO.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "UNINSTALL.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "WampServer.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "µTorrent.lnk"
-26-05-2017 18:36:00 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47675 complete.
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "04_LoggingLevels.docx"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "a50f6b920970ae87bf459fed07e1b071.gif"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Atom.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "AT_Portugal_Mama.JPG"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Cisco Packet Tracer.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ClientSocket.java"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Clio_memoire.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "comPlanContrat2017.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Counter-Strike.url"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "creditCardStatement.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "desktop.ini"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "eclipse  Luna 4.4.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ETH_Turoque_Account_Capture.JPG"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Gant_Daniel.xlsx"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "hipster_russe.jpg"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel.pdf"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel_Page_1.png"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "ID_Roque_Daniel_Page_2.png"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "index.jpg"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Les cingles de l informatique3_informatique pour tous.avi"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "myCloud.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Mémoire_Voyages.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "p2p_exemple.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Postman.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "roqueDanielID.rar"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "Slack.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "toDO.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "UNINSTALL.txt"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "WampServer.lnk"
-26-05-2017 18:36:00 (ClientConnection.printArray)  [INFO] Filename : "µTorrent.lnk"
-26-05-2017 18:36:00 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 18:36:00 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 18:41:30 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 18:41:30 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 18:41:49 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47729 was accepted
-26-05-2017 18:41:49 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 18:41:49 (ClientConnection.run)  [INFO] Action 'registration' chosen
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:41:49 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47729 complete.
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 18:41:49 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 18:41:49 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 18:41:49 (ClientConnection.run)  [SEVERE] socket closed
-26-05-2017 19:47:50 (util.ServerLogger.getLogger)  [INFO] Logger started
-26-05-2017 19:47:50 (Server.listeningSocket)  [INFO] The server is waiting for connection
-26-05-2017 19:48:09 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:47905 was accepted
-26-05-2017 19:48:09 (Server.listeningSocket)  [INFO] Thread handle request from client
-26-05-2017 19:48:09 (ClientConnection.run)  [INFO] Action 'registration' chosen
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 19:48:09 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:47905 complete.
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
-26-05-2017 19:48:09 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
-26-05-2017 19:48:09 (ClientConnection.run)  [INFO] ObjectInputStream closed
-26-05-2017 19:48:09 (ClientConnection.run)  [SEVERE] socket closed
+27-05-2017 14:04:35 (Server.listeningSocket)  [INFO] The server is waiting for connection
+27-05-2017 14:05:36 (Server.listeningSocket)  [INFO] The server is waiting for connection
+27-05-2017 14:07:43 (Server.listeningSocket)  [INFO] The server is waiting for connection
+27-05-2017 14:08:50 (Server.listeningSocket)  [INFO] The server is waiting for connection
+27-05-2017 14:09:04 (Server.listeningSocket)  [INFO] Connection from /192.168.108.1:2678 was accepted
+27-05-2017 14:09:04 (Server.listeningSocket)  [INFO] Thread handle request from client
+27-05-2017 14:09:04 (ClientConnection.run)  [INFO] Action 'registration' chosen
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
+27-05-2017 14:09:04 (ClientConnection.registerClient)  [INFO] Registration from /192.168.108.1:2678 complete.
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "192.168.108.1"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "Coco.txt"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "Kevin.txt"
+27-05-2017 14:09:04 (ClientConnection.printArray)  [INFO] Filename : "tte.txt"
+27-05-2017 14:09:04 (ClientConnection.run)  [INFO] ObjectInputStream closed
+27-05-2017 14:24:31 (Server.listeningSocket)  [INFO] The server is waiting for connection
+27-05-2017 14:24:48 (Server.listeningSocket)  [INFO] The server is waiting for connection
