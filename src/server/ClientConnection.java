@@ -44,7 +44,7 @@ public class ClientConnection implements Runnable {
 	 */
 	@Override
 	public void run() {
-		logger = ServerLogger.getLogger() ; 
+//		logger = ServerLogger.getLogger() ; 
 
 		try {
 			// open a object input stream 
