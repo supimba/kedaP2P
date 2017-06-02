@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,17 +28,13 @@ public class ClientConnection implements Runnable {
 	private ObjectOutputStream objectOutput ;
 	private Object object ;
 	private String actionChoice ; 
+	private SocketAddress connectedClientIP ; 
 
-	//TODO :  Envoie l'adresse ip puis envoie la liste des fichiers après confirmation
-	//TODO : Demande confirmation de rengistrement
 
 	public ClientConnection(Socket clientSocket, ArrayList<Object> listAllClients) {
 		this.clientSocket = clientSocket ;
 		this.listAllClients = listAllClients;
-		//		this.objectInput = objectInput ; 
-		//		this.ipAdress = clientSocket.getRemoteSocketAddress().toString() ;
-
-
+		this.connectedClientIP = clientSocket.getRemoteSocketAddress() ; 
 	}
 
 	/*
@@ -60,6 +57,7 @@ public class ClientConnection implements Runnable {
 				// get action from client in the ObjectInputStream
 				actionChoice = (String) objectInput.readObject() ;
 
+			
 				switch(actionChoice){
 				case "registration":
 					logger.log(Level.INFO, "Action 'registration' chosen") ;
@@ -69,19 +67,17 @@ public class ClientConnection implements Runnable {
 
 					// register the client in the list of all clients
 					registerClient(object);
-					objectInput.close();
-					logger.log(Level.INFO, "ObjectInputStream closed");
 					break;
 
 				case"getfiles":
-					System.out.println("ready to get files");
+					logger.log(Level.INFO, "Start to retrieve clients information and files list");
 					ArrayList<Object> clientsArrayList = getClientsFilesList() ;
 
 					objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
 					objectOutput.writeObject(clientsArrayList);
 					objectOutput.flush() ;
+					
 					logger.log(Level.INFO, "Clients information and files list sent");
-
 					break;
 
 				}
@@ -95,8 +91,17 @@ public class ClientConnection implements Runnable {
 		}catch(SocketException e ){
 			logger.log(Level.SEVERE, e.getMessage(), e);
 
+		}catch(EOFException e){
+			logger.log(Level.INFO, "ObjectInput closed") ;
+
+			
 		}catch (IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			
+			// verify if the client socket was lost or closed
+			if(clientSocket.isClosed())
+				logger.log(Level.INFO, "Connection with the client from "+ connectedClientIP +" closed") ;
+			else
+				logger.log(Level.SEVERE, e.getMessage(), e);
 
 		}
 
@@ -105,28 +110,13 @@ public class ClientConnection implements Runnable {
 	private void registerClient(Object object){
 
 		clientFiles = (ArrayList<String>) object ; 
-
-		//TODO : A supprimer
-		// récupérer directemnet un objet ArrayList  : https://docs.oracle.com/javase/tutorial/essential/io/objectstreams.html
-		//		clientFiles = new ArrayList<String>() ;
-		//		clientFiles.add(ipAdress) ;
-
-		// TODO: A supprimer
+		
+		//log the file list send by the client
 		printArray(clientFiles);
 		listAllClients.add(clientFiles) ;
-		logger.info("Registration from "+clientSocket.getRemoteSocketAddress()+" complete.");
+		logger.info("Registration from "+clientSocket.getRemoteSocketAddress()+" complete");
 
-		//		try {
-		//			out = new PrintWriter(clientSocket.getOutputStream(), true);
-		//			out.println("File list was registred.");
-		//			out.flush();
-		//			out.close();
-		//		} catch (IOException e) {
-		//			logger.log(Level.SEVERE, e.getMessage(), e);
-		//			e.printStackTrace();
-		//		}
-
-		printObjectList();
+		System.out.println("COMPLETE ");
 
 	}
 	private ArrayList<Object> getClientsFilesList() {
@@ -136,17 +126,10 @@ public class ClientConnection implements Runnable {
 	}
 
 	public void printArray(ArrayList<String> array){
-
+		
+		logger.log(Level.INFO, "Shared files:");
 		for(String files : array)
-			logger.log(Level.INFO, "Filename : \"" + files+ "\"");
-
-	}
-
-	public void printObjectList(){
-
-		for(int i =0 ; i<  listAllClients.size(); i++ ){
-			printArray( (ArrayList<String>)listAllClients.get(i) ) ; 
-		}
+			logger.log(Level.INFO, files);
 
 	}
 

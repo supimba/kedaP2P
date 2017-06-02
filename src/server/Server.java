@@ -47,7 +47,7 @@ public class Server {
 
 				clientConnection = new ClientConnection(clientSocket, listAllClients) ; 
 				
-				// 
+				// initiate thread for new client connection
 				Thread t = new Thread(clientConnection) ; 
 				t.start();
 				logger.log(Level.INFO, "Thread handle request from client");
