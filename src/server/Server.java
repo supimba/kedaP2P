@@ -1,4 +1,5 @@
 package server;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -6,7 +7,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import util.ServerLogger;
 
 /*
@@ -14,18 +14,15 @@ import util.ServerLogger;
  * and open a thread for all new clients.
  */
 public class Server {
-
 	private ServerSocket mySkServer;
 	private int serverPort ; 
 	private Socket clientSocket;
 	private Logger logger ; 
 	private ArrayList<Object> listAllClients ;
-
-
+	
 	public Server() {
 		getResources(); 
 		listeningServerSocket() ; 
-
 	}
 
 	private void listeningServerSocket(){
@@ -52,16 +49,13 @@ public class Server {
 				t.start();
 				logger.log(Level.INFO, "Thread handle request from client");
 			}
-
-		} catch (IOException e) {
+		}catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(),e);
 		}
-
 	}
 	
 	private void getResources(){
 		ResourceBundle bundle = ResourceBundle.getBundle("server.properties.config");
 		serverPort = Integer.parseInt(bundle.getString("server.port"));
 	}
-
 }
