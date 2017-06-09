@@ -1,9 +1,10 @@
-package server;
+package application;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,8 @@ public class Server {
 	private Logger logger ; 
 	private ArrayList<Object> listAllClients ;
 	
+	private LinkedHashMap<String, Client> clients;
+	
 	public Server() {
 		getResources(); 
 		listeningServerSocket() ; 
@@ -27,14 +30,16 @@ public class Server {
 
 	private void listeningServerSocket(){
 		// initiate logger and list of all clients
-		logger = ServerLogger.getLogger() ;
-		listAllClients = new ArrayList<Object>() ; 
+		logger = ServerLogger.getLogger();
+		listAllClients = new ArrayList<Object>();
+		
+		clients = new LinkedHashMap<>();
 
 		try {
 			// open server socket and listen
 			mySkServer = new ServerSocket(serverPort) ; 
 			
-			logger.log(Level.INFO, "The server is waiting for connection") ;
+			logger.log(Level.INFO, "The server is waiting for connection");
 			ClientConnection clientConnection ;
 
 			while(true){
@@ -42,7 +47,8 @@ public class Server {
 				clientSocket = mySkServer.accept() ;
 				logger.log(Level.INFO, "Connection from "+ clientSocket.getRemoteSocketAddress() +" was accepted");
 
-				clientConnection = new ClientConnection(clientSocket, listAllClients) ; 
+//				clientConnection = new ClientConnection(clientSocket, listAllClients);
+				clientConnection = new ClientConnection(clientSocket, clients);
 				
 				// initiate thread for new client connection
 				Thread t = new Thread(clientConnection) ; 

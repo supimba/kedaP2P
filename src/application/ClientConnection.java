@@ -1,4 +1,4 @@
-package server;
+package application;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -8,25 +8,27 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.ServerLogger;
 
 public class ClientConnection implements Runnable {
 
-	private static Logger logger ;
-	private Socket clientSocket  ; 
+	private static Logger logger;
+	private Socket clientSocket; 
 	private ArrayList<String> clientFiles;
-	private ArrayList<Object> listAllClients ; 
-	private ObjectInputStream objectInput ; 
-	private ObjectOutputStream objectOutput ;
-	private Object object ;
-	private String actionChoice ; 
-	private SocketAddress connectedClientIP ;
+//	private ArrayList<Object> listAllClients;
+	private LinkedHashMap<String, Client> clients;
+	private ObjectInputStream objectInput; 
+	private ObjectOutputStream objectOutput;
+	private Object object;
+	private String actionChoice; 
+	private SocketAddress connectedClientIP;
 
-	public ClientConnection(Socket clientSocket, ArrayList<Object> listAllClients) {
+	public ClientConnection(Socket clientSocket, LinkedHashMap<String, Client> clients) {
 		this.clientSocket = clientSocket ;
-		this.listAllClients = listAllClients;
+		this.clients = clients;
 		this.connectedClientIP = clientSocket.getRemoteSocketAddress() ; 
 	}
 
@@ -44,16 +46,15 @@ public class ClientConnection implements Runnable {
 			objectInput = new ObjectInputStream(clientSocket.getInputStream())  ;
 
 			while(true){
-
 				// get action from client in the ObjectInputStream
-				actionChoice = (String) objectInput.readObject() ;
+				actionChoice = (String) objectInput.readObject();
 			
 				switch(actionChoice){
 					case "registration":
 						logger.log(Level.INFO, "Action 'registration' chosen") ;
 	
 						// get the object containing the client information
-						object = objectInput.readObject() ;
+						object = objectInput.readObject();
 	
 						// register the client in the list of all clients
 						registerClient(object);
@@ -61,7 +62,7 @@ public class ClientConnection implements Runnable {
 	
 					case"getfiles":
 						logger.log(Level.INFO, "Start to retrieve clients information and files list");
-						ArrayList<Object> clientsArrayList = getClientsFilesList() ;
+						LinkedHashMap<String, Client> clientsArrayList = getClientsFilesList();
 	
 						objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
 						objectOutput.writeObject(clientsArrayList);
@@ -69,8 +70,29 @@ public class ClientConnection implements Runnable {
 						
 						logger.log(Level.INFO, "Clients information and files list sent");
 						break;
+						
+					case"getclientbyuuid":
+						logger.log(Level.INFO, "Client informations asked");
+						String uuid = (String) objectInput.readObject();
+	
+						objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
+						objectOutput.writeObject(clients.get(uuid));
+						objectOutput.flush() ;
+						
+						logger.log(Level.INFO, "Clients information and files list sent");
+						break;
+						
+					case"quit":
+						uuid = (String) objectInput.readObject();
+						logger.log(Level.INFO, "Client wants to disconnect [" + uuid + "]");						
+	
+						if(clients.remove(uuid) != null)						
+							logger.log(Level.INFO, "Client successfully deleted from users list");
+						else
+							logger.log(Level.INFO, "Client couldn't be deleted");
+						
+						break;
 				}
-
 			}
 
 		} catch ( ClassNotFoundException e) {
@@ -89,20 +111,35 @@ public class ClientConnection implements Runnable {
 	}
 
 	private void registerClient(Object object){
-
-		clientFiles = (ArrayList<String>) object ; 
+		// Get client object
+		Client client = (Client) object ;
 		
-		//log the file list send by the client
-		printArray(clientFiles);
-		listAllClients.add(clientFiles) ;
-		logger.info("Registration from "+clientSocket.getRemoteSocketAddress()+" complete");
-
-		System.out.println("COMPLETE ");
-
+		// Modify client informations if already registered or save its informations
+		if(clients.containsKey(client.getUuid()))
+			clients.replace(client.getUuid(), client);
+		else
+			clients.put(client.getUuid(), client) ;
+		
+		System.out.println(clients.size());
+		
+		for (String key : clients.keySet())
+		{
+			Client c = clients.get(key);
+		    System.out.println(c.getClientIp() + " - " + c.getUuid() );
+		    for (String string : c.getFiles()) {
+				System.out.println(string);
+			}
+		}
+		
+		// log the file list sent by the client
+		printArray(client.getFiles());
+		
+		// End of registration
+		logger.info("Registration from " + clientSocket.getRemoteSocketAddress() + " complete");
 	}
 	
-	private ArrayList<Object> getClientsFilesList() {
-		return listAllClients ; 
+	private LinkedHashMap<String, Client> getClientsFilesList() {
+		return clients ; 
 
 	}
 
