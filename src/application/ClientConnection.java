@@ -83,7 +83,7 @@ public class ClientConnection implements Runnable {
 	 */
 	@Override
 	public void run() {
-		// Get the logger object
+		// get the logger object
 		logger = ServerLogger.getLogger() ; 
 
 		try {
@@ -96,16 +96,19 @@ public class ClientConnection implements Runnable {
 			
 				switch(actionChoice){
 					case "registration":
-						// log the desired action
-						logger.log(Level.INFO, "Action 'registration' chosen") ;
+
 	
-						// register the client in the list of all clients
+						
 						try{
+							// get the Client Object in the object input stream
 							Client c = (Client) objectInput.readObject();
+							logger.log(Level.INFO, "Application for registration of client UUID["+c.getUuid()+"]") ;
+							
+							// register the client in the list of all clients
 							registerClient(c);
 						}catch(ClassCastException e){
 							// Error of registration
-							logger.info("Registration from " + clientSocket.getRemoteSocketAddress() + " impossible");
+							logger.info("Client registration with socket address " + clientSocket.getRemoteSocketAddress() + " impossible");
 						}
 						
 						break;	
@@ -126,10 +129,10 @@ public class ClientConnection implements Runnable {
 						// log the desired action
 						logger.log(Level.INFO, "Client informations asked");
 						
-						// Get uuid of desired client
+						// get uuid of desired client
 						String uuid = (String) objectInput.readObject();
 	
-						// Send desired client
+						// send desired client
 						objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
 						objectOutput.writeObject(clients.get(uuid));
 						objectOutput.flush() ;
@@ -139,34 +142,43 @@ public class ClientConnection implements Runnable {
 						
 						break;						
 					case"quit":
-						// Get uuid of client that wants to disconnect
+						// get uuid of client that wants to disconnect
 						uuid = (String) objectInput.readObject();
 						
 						// log the desired action
-						logger.log(Level.INFO, "Client wants to disconnect [" + uuid + "]");						
+						logger.log(Level.INFO, "Client UUID["+ uuid +"] wants to disconnect, client socket will instantly close");
+						clientSocket.close() ; 
 	
 						// remove client of list and log the error or the successful deletion
 						if(clients.remove(uuid) != null)						
-							logger.log(Level.INFO, "Client successfully deleted from users list");
+							logger.log(Level.INFO, "Client UUID["+uuid +"] successfully deleted from users list");
 						else
-							logger.log(Level.INFO, "Client couldn't be deleted");
+							logger.log(Level.INFO, "Client UUID["+uuid+"] couldn't be deleted");
 						
+						ServerLogger.closeFH();						
 						break;
 				}
 			}
 		}catch ( ClassNotFoundException e) {
 			// log severe error
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			
 		}catch(SocketException e ){
 			// log severe error
+			if(clientSocket.isClosed()){
+			logger.log(Level.WARNING, "Socket connection with socket adress "+ connectedClientIP + " closed") ;
+
+			}
+		else
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			
 		}catch(EOFException e){
 			// log severe error
-			logger.log(Level.INFO, "ObjectInput closed") ;			
+			logger.log(Level.WARNING, "ObjectInput with socket adress"+connectedClientIP+" closed", e) ;			
 		}catch (IOException e) {			
 			// verify if the client socket was lost or closed
 			if(clientSocket.isClosed())
-				logger.log(Level.INFO, "Connection with the client from "+ connectedClientIP +" closed") ;
+				logger.log(Level.WARNING, "Socket connection with socket adress "+ connectedClientIP +" closed") ;
 			else
 				logger.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -177,25 +189,25 @@ public class ClientConnection implements Runnable {
 	 * @param object The client
 	 */
 	private void registerClient(Client client){		
-		// Modify client informations if already registered or save its informations
+		// modify client informations if already registered or save its informations
 		if(clients.containsKey(client.getUuid()))
 			clients.replace(client.getUuid(), client);
 		else
 			clients.put(client.getUuid(), client) ;
 		
 		// log the file list sent by the client
-		printArray(client.getFiles());
+		printFilesListArray(client.getFiles(), client.getUuid());
 		
-		// End of registration
-		logger.info("Registration from " + clientSocket.getRemoteSocketAddress() + " complete");
+		// end of registration
+		logger.info("Registration from " + clientSocket.getRemoteSocketAddress() + " with client UUID ["+client.getUuid() +"] complete");
 	}
 
 	/**
 	 * This method allows to log all shared files by the client
 	 * @param array An array of string containing all the files
 	 */
-	public void printArray(ArrayList<String> array){
-		logger.log(Level.INFO, "Shared files:");
+	public void printFilesListArray(ArrayList<String> array, String uuid){
+		logger.log(Level.INFO, "Files shared by the client UUID["+uuid+"] : ");
 		for(String files : array)
 			logger.log(Level.INFO, files);
 	}
