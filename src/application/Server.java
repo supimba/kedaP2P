@@ -44,6 +44,11 @@ public class Server {
 	 * Default constructor. It will get the settings from the config file, then create the server socket and finally waits for client connections
 	 */
 	public Server() {
+		
+		// initiate logger and list of all clients
+		logger = ServerLogger.getLogger();	
+		logger.log(Level.INFO, "The server is running");
+		
 		getSettings(); 
 		listeningServerSocket() ; 
 	}
@@ -52,26 +57,25 @@ public class Server {
 	 * Create the server socket and wait for client connections
 	 */
 	private void listeningServerSocket(){
-		// initiate logger and list of all clients
-		logger = ServerLogger.getLogger();		
+	
 		clients = new LinkedHashMap<>();
 
 		try {
 			// open server socket and listen
 			mySkServer = new ServerSocket(serverPort);			
-			logger.log(Level.INFO, "The server is waiting for connection");
+			logger.log(Level.INFO, "The server is waiting for a connection");
 			ClientConnection clientConnection ;
 
 			while(true){
 				// accept client connection
 				clientSocket = mySkServer.accept();
-				logger.log(Level.INFO, "Connection from "+ clientSocket.getRemoteSocketAddress() +" was accepted");
+				logger.log(Level.INFO, "Connection from "+ clientSocket.getRemoteSocketAddress() +" accepted");
 				clientConnection = new ClientConnection(clientSocket, clients);
 				
 				// initiate thread for new client connection
 				Thread t = new Thread(clientConnection) ; 
 				t.start();
-				logger.log(Level.INFO, "Thread handle request from client");
+				logger.log(Level.INFO, "Thread handle requests from client");
 			}
 		}catch (IOException e) {
 			// Log the severe error
