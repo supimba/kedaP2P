@@ -17,11 +17,6 @@ public class ServerLogger {
 	private static Logger logger;
 	
 	/**
-	 * Get a simple file logging
-	 */
-	private static FileHandler fh; 
-	
-	/**
 	 * The util library to get useful functions
 	 */
 	private static Util u;	
@@ -56,22 +51,21 @@ public class ServerLogger {
 		fileName = date+".log" ;
 		filePath += fileName ;
 		
-		// create the logger
+		// creates the logger
 		logger = Logger.getLogger(fileName) ; 
 
 		// create the file
 		try {
 			// opens the file in append mode (i.e. creates if not exists or add content if already exists) and set it as log destination
-			fh = new FileHandler(filePath, true) ;
+			FileHandler fh = new FileHandler(filePath, true) ;
 			logger.addHandler(fh);
 
 			// use a custom formatter for logs
 			LogfileFormatter myFormatter = new LogfileFormatter();
 			fh.setFormatter(myFormatter);
-			 
+			
 			// log the start of logging
 			logger.log(Level.INFO, "Logger started");
-
 		} catch (SecurityException e) {
 			// log of severe exception
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -79,13 +73,6 @@ public class ServerLogger {
 			// log of severe exception
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
-	}
-	
-	/**
-	 * This methods close the FileHandler
-	 */
-	public static void closeFH(){
-		fh.close();
 	}
 	
 	/**
