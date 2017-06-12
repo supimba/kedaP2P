@@ -187,7 +187,7 @@ public class ClientConnection implements Runnable {
 		printArray(client.getFiles());
 		
 		// End of registration
-		logger.info("Registration from " + clientSocket.getRemoteSocketAddress() + " complete");
+		logger.info("Registration from " + client.getClientIp() + " complete");
 	}
 
 	/**
