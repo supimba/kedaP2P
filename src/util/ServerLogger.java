@@ -1,5 +1,6 @@
 package util;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -51,10 +52,25 @@ public class ServerLogger {
 		// instanciate util object
 		u = new Util();
 
-		// get the current month and prepare file names
-		String date = u.getDateMonth() ;
-		fileName = date+".log" ;
-		filePath += fileName ;
+		// get the current month
+		String date = u.getDateMonth();
+		fileName = date+".log";		
+		
+		// creates the logger
+		logger = Logger.getLogger(fileName); 
+
+		try {
+	        // if folder for logs doesn't exist, create it so logs will work
+			File logFolder = new File (filePath);
+	        if (!logFolder.exists() ) {
+	        	logFolder.mkdirs();
+	        }
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+		
+		// prepare filename
+		filePath += fileName;
 
 		// creates the logger
 		logger = Logger.getLogger(fileName) ; 
